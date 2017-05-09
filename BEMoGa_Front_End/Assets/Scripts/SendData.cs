@@ -6,59 +6,18 @@ using Utilities;
 /* 
  * Sends .cs data to server.
  * All URI's must be supplied manually and sent to each field. Example of URI: http://www.serverplacement.no/projectName/api/field
- * Supports single Integers, Strings and Booleans.
- * Supports arrays of Integers and Strings.
+ * Supports single values and arrays.
+ * To send non-string values, use the .ToString() function when sending them to SendData.
  */
 public class SendData : MonoBehaviour {
 
   /*
-   * Sends a single integer to the server
+   * Sends a single value to the server
    * @Value: value = integer value to be sent
    * @Value: field = name of field/key
    * @Value: URI = URL address of API
    */
-  public void SendInteger(int value, string field, string URI)
-  {
-    //Creates form to be sent to server
-    WWWForm form = new WWWForm();
-
-    //Adds all fields and values
-    form.AddField(field, value.ToString());
-
-    //Creates web request and sends it to RequestDataTransfer
-    UnityWebRequest www = UnityWebRequest.Post(URI, form);
-    StartCoroutine(RequestDataTransfer(www));
-  }
-
-  /*
-   * Sends a single integer to the server
-   * @Value: value = integer array to be sent
-   * @Value: field = name of field/key
-   * @Value: URI = URL address of API
-   */
-  public void SendIntegerArray(int[] value, string[] field, string URI)
-  {
-    //Creates form to be sent to server
-    WWWForm form = new WWWForm();
-
-    //Adds all fields and values
-    for (int i = 0; i > value.Length; i++)
-    {
-      form.AddField(field[i], value[i].ToString());
-    }
-
-    //Creates web request and sends it to RequestDataTransfer
-    UnityWebRequest www = UnityWebRequest.Post(URI, form);
-    StartCoroutine(RequestDataTransfer(www));
-  }
-
-  /*
-   * Sends a single integer to the server
-   * @Value: value = string value to be sent
-   * @Value: field = name of field/key
-   * @Value: URI = URL address of API
-   */
-  public void SendString(string value, string field, string URI)
+  public void SendSingle(string value, string field, string URI)
   {
     //Creates form to be sent to server
     WWWForm form = new WWWForm();
@@ -73,39 +32,20 @@ public class SendData : MonoBehaviour {
 
   /*
    * Sends a single integer to the server
-   * @Value: value = string array to be sent
+   * @Value: value = integer array to be sent
    * @Value: field = name of field/key
    * @Value: URI = URL address of API
    */
-  public void SendStringArray(string[] value, string[] field, string URI)
-  {
-    //Creates form to be sent to server
-    WWWForm form = new WWWForm();
-
-
-    for (int i = 0; i > value.Length; i++)
-    {
-      form.AddField(field[i], value[i]);
-    }
-
-    //Creates web request and sends it to RequestDataTransfer
-    UnityWebRequest www = UnityWebRequest.Post(URI, form);
-    StartCoroutine(RequestDataTransfer(www));
-  }
-
-  /*
-   * Sends a single integer to the server
-   * @Value: value = boolean value to be sent
-   * @Value: field = name of field/key
-   * @Value: URI = URL address of API
-   */
-  public void SendBoolean(bool value, string field, string URI)
+  public void SendArray(string[] value, string[] field, string URI)
   {
     //Creates form to be sent to server
     WWWForm form = new WWWForm();
 
     //Adds all fields and values
-    form.AddField(field, value.ToString());
+    for (int i = 0; i > value.Length; i++)
+    {
+      form.AddField(field[i], value[i]);
+    }
 
     //Creates web request and sends it to RequestDataTransfer
     UnityWebRequest www = UnityWebRequest.Post(URI, form);
