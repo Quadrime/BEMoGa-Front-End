@@ -7,15 +7,12 @@ namespace DataStorage
 {
   public class GlobalData
   {
-
+    //Variables
     LoginContainer loginInfo = null;
     private static GlobalData instance;
 
-    /**
-    * Get a reference to the Global Data object.
-    * There exists only one Global Data object and it lasts the entire duration of the application.
-    * @returns a reference to the Global Data object, if it doesn't exist already it will be created.
-    */
+    ///<summary>Get a reference to the Global Data object. There exists only one Global Data object and it lasts the entire duration of the application.</summary>
+    ///<returns>Returns a reference to the Global Data object, if it doesn't exist already it will be created</returns>
     public static GlobalData Instance
     {
       get
@@ -28,66 +25,56 @@ namespace DataStorage
       }
     }
 
-    /**
-    * Stores loginInfo
-    * @param loginData = data returned from server
-    */
-    public void SetLoginData(LoginContainer loginData)
+    ///<summary>Stores loginInfo</summary>
+    ///<param name="loginData">Data returned from server</param>
+    public LoginContainer SetLoginData
     {
-      loginInfo = loginData;
+      set { loginInfo = value; }
     }
 
-    /**
-    * Check if the user is logged in
-    * @returns True if logged in, false if not 
-    */
-    public bool IsLoggedIn()
+    ///<summary>Check if the user is logged in</summary>
+    ///<returns>Returns bool true if logged in, false if not</returns>
+    public bool IsLoggedIn
     {
-      if (loginInfo != null)
+      get
       {
-        return true;
+        if (loginInfo != null)
+        {
+          return true;
+        }
+        return false;
       }
-      return false;
     }
 
-    /**
-    * Gets user's access token
-    * @returns Access token, if not logged in returns null
-    */
-    public string GetAccessToken()
+    ///<summary>Gets user's access token</summary>
+    ///<returns>Returns user's access token</returns>
+    public string GetAccessToken
+    { 
+      get { return loginInfo.id; }
+    }
+
+    ///<summary>Get's user's ID</summary>
+    ///<returns>Returns int of UserID</returns>
+    public int GetUserID
     {
-      if (IsLoggedIn())
-      {
-        return loginInfo.id;
-      }
-
-      return null;
+      get { return loginInfo.userId; }
     }
 
-    /**
-    * Gets user's ID
-    * @returns UserID, if not logged in returns -1
-    */
-    public int GetUserID()
+    ///<summary>Gets user's username</summary>
+    ///<returns>Returns string of username</returns>
+    public string GetUsername
     {
-      if (IsLoggedIn())
-      {
-        return loginInfo.userId;
-      }
-
-      return -1;
+      get { return loginInfo.username; }
     }
 
-    /**
-     * Fully erases currently logged in user (useful for logging out)
-     */
+    ///<summary>Fully erases currently logged in user (useful for logging out)</summary>
     public void EraseUserLog()
     {
-      if (IsLoggedIn())
+      if (IsLoggedIn)
       {
-        loginInfo.id = null;
         loginInfo.userId = -1;
-        loginInfo.created = null;
+        loginInfo.id = null;
+        loginInfo.username = null;
       }
       loginInfo = null;
     }

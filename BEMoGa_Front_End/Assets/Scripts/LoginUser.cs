@@ -1,14 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using Utilities;
 using DataStorage;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Class for handling user login requests.
-/// Each user login requires a userName and password, as well as the database field and database URI.
+/// Each user login requires a userName, and may include a password, as well as the database field and database URI.
 /// WARNING!!! Password protection not optimal in this solution.
 /// </summary>
 public class LoginUser : MonoBehaviour {
@@ -68,7 +67,7 @@ public class LoginUser : MonoBehaviour {
       if (login.userId > 0)
       {
         //Store login data
-        GlobalData.Instance.SetLoginData(login);
+        GlobalData.Instance.SetLoginData = login;
 
         //Loads next scene
         if (nextScene != null)

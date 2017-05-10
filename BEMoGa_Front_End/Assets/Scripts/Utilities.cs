@@ -8,9 +8,7 @@ using UnityEngine;
  */ 
 namespace Utilities{
 
-  /**
-    * Container for json error object
-    */
+  ///<summary>JSON container for errors</summary>
   [System.Serializable]
   public class ErrorContainer
   {
@@ -33,34 +31,36 @@ namespace Utilities{
     public string stack = "Null";
   }
 
-  /**
-    * Container for json login object
-    */
+  ///<summary>JSON container for user login</summary>
   [System.Serializable]
   public class LoginContainer
   {
     //Contains token key
+    public string username = "Null";
+
+    //User's access token
     public string id = "Null";
 
-    //
-    public int ttl = -1;
+    //User's user Id
+    public int userId = -1;
+  }
 
-    //Date the message was created, format {yyyy-mm-ddThh:mm:ss.fffZ}
-    public string created = "Null";
+  ///<summary>JSON container for newUser</summary>
+  [System.Serializable]
+  public class NewUserContainer
+  {
+    //Username recieved
+    public string username = "Null";
 
-    //Users user id
+    //User's user Id
     public int userId = -1;
   }
 
   public class JsonHelper
   {
-    /**
-    * Converts json array into object array
-    * @author ffleurey
-    * @see https://forum.unity3d.com/threads/how-to-load-an-array-with-jsonutility.375735/
-    * @param json to turn into array
-    * @returns array of object type
-    */
+    ///<summary>Converts json array into object array. See https://forum.unity3d.com/threads/how-to-load-an-array-with-jsonutility.375735/ for more info.</summary>
+    ///<param name="json">JSON string to turn into an array</param>
+    ///<returns>Returns an array of the object type</returns>
     public static T[] getJsonArray<T>(string json)
     {
       string newJson = "{ \"array\": " + json + "}";
@@ -68,17 +68,16 @@ namespace Utilities{
       return wrapper.array;
     }
 
-    //serializable wrapper class for getJsonArray function
+    ///<summary>Serializable wrapper class for getJsonArray function</summary>
     [System.Serializable]
     private class Wrapper<T>
     {
       public T[] array;
     }
 
-    /**
-    * Quick hack for removing object around error object
-    * @param json to get subobject from
-    */
+    ///<summary>Quick hack for removing object around error object</summary>
+    ///<param name="json">JSON object to get subobject from</param>
+    ///<returns>Returns JSON string</returns>
     public static string GetSubObject(string json)
     {
       //Remove "{ "error": " at the start of json
