@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using DataStorage;
 
 public class ExampleScript : MonoBehaviour {
   string floatExField = "floatEx";
@@ -8,13 +7,9 @@ public class ExampleScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-    GameObject transmitter = GameObject.Find("DataTransmitter");
-    if (transmitter != null)
-    {
-      PrepareData stuff = transmitter.GetComponent<PrepareData>();
-      stuff.addField(floatExField, floatEx);
-      Debug.Log(stuff.Forms);
-    }
+    PrepareData stuff = new PrepareData();
+    stuff.addField(floatExField, floatEx);
+    Debug.Log(GlobalData.Instance.Forms.ToString());
 	}
 	
 	// Update is called once per frame

@@ -84,16 +84,16 @@ public class NewUser : MonoBehaviour {
       }
     }
 
-    //Error status code
-    int statusCode = 0;
+    ////Error status code
+    //int statusCode = 0;
 
-    //Try and convert to error object
-    ErrorContainer error = JsonUtility.FromJson<ErrorContainer>(JsonHelper.GetSubObject(www.downloadHandler.text));
-    if (error != null)
-    {
-      //Check that it is not a default object
-      if (error.status > 0)
-        statusCode = error.statusCode;
-    }
+    ////Try and convert to error object
+    //ErrorContainer error = JsonUtility.FromJson<ErrorContainer>(JsonHelper.GetSubObject(www.downloadHandler.text));
+    //if (error != null)
+    //{
+    //  //Check that it is not a default object
+    //  if (error.status > 0)
+    //    statusCode = error.statusCode;
+    //}
   }
 }
