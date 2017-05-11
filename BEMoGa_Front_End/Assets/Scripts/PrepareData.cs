@@ -5,16 +5,30 @@ using UnityEngine.Networking;
 using Utilities;
 using DataStorage;
 
-
+/// <summary>
+/// Prepares data for transfer
+/// </summary>
 public class PrepareData : MonoBehaviour {
 
-  private WWWForm forms;
+  //Locally stored variable
+  private WWWForm forms = null;
 
+  /// <summary>
+  /// Get/Set function for forms, in case you would want to manually set it or see what it contains
+  /// </summary>
+  /// <param>Form to replace it with</param>
+  /// <returns>Returns WWWForms data of forms</returns>
   public WWWForm Forms
   {
     get { return forms; }
     set { forms = value; }
   }
+
+  void Awake ()
+  {
+    forms = new WWWForm();
+  }
+
 
   public void addField(string field, string value)
   {
@@ -46,5 +60,10 @@ public class PrepareData : MonoBehaviour {
     UnityWebRequest www = UnityWebRequest.Post(URI, forms);
     SendData send = new SendData();
     StartCoroutine(send.RequestDataTransfer(www));
+  }
+
+  public void clearData()
+  {
+    forms = null;
   }
 }
