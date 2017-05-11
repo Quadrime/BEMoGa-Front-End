@@ -1,57 +1,17 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utilities;
 
 ///<summary>
 /// Sends .cs data to server.
-/// All URI's must be supplied manually and sent to each field. Example of URI: http://www.serverplacement.no/projectName/api/field
-/// Supports single values and arrays.
-/// To send non-string values, use the .ToString() function when sending them to SendData.
 ///</summary>
 public class SendData : MonoBehaviour {
 
-
-   ///<summary>Sends a single value to the server</summary>
-   ///<param name="value">Value to be sent</param>
-   ///<param name="field">Name of field/key</param>
-   ///<param name="URI">URL address of API</param>
-  public void SendSingle(string value, string field, string URI)
-  {
-    //Creates form to be sent to server
-    WWWForm form = new WWWForm();
-
-    //Adds all fields and values
-    form.AddField(field, value);
-
-    //Creates web request and sends it to RequestDataTransfer
-    UnityWebRequest www = UnityWebRequest.Post(URI, form);
-    StartCoroutine(RequestDataTransfer(www));
-  }
-
-  ///<summary>Sends a single value to the server</summary>
-  ///<param name="value">Value array to be sent</param>
-  ///<param name="field">Names of field/key</param>
-  ///<param name="URI">URL address of API</param>
-  public void SendArray(string[] value, string[] field, string URI)
-  {
-    //Creates form to be sent to server
-    WWWForm form = new WWWForm();
-
-    //Adds all fields and values
-    for (int i = 0; i > value.Length; i++)
-    {
-      form.AddField(field[i], value[i]);
-    }
-
-    //Creates web request and sends it to RequestDataTransfer
-    UnityWebRequest www = UnityWebRequest.Post(URI, form);
-    StartCoroutine(RequestDataTransfer(www));
-  }
-
   /// <summary>Sends data to server and logs in user locally if succesful</summary>
   /// <param name="www">UnityWebRequest created by functions above</param>
-  private IEnumerator RequestDataTransfer(UnityWebRequest www)
+  public IEnumerator RequestDataTransfer(UnityWebRequest www)
   {
     //Sends request to server and waits for a response (control given back to Unity in the meantime)
     yield return www.Send();

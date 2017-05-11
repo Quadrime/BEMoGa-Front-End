@@ -10,6 +10,7 @@ namespace DataStorage
     //Variables
     LoginContainer loginInfo = null;
     private static GlobalData instance;
+    private static string serverPath = "http://localhost:3000/api/";
 
     ///<summary>Get a reference to the Global Data object. There exists only one Global Data object and it lasts the entire duration of the application.</summary>
     ///<returns>Returns a reference to the Global Data object, if it doesn't exist already it will be created</returns>
@@ -77,6 +78,12 @@ namespace DataStorage
         loginInfo.username = null;
       }
       loginInfo = null;
+    }
+
+    public string ServerPath
+    {
+      get { return serverPath; }
+      set { serverPath = value; }
     }
   }
 }
