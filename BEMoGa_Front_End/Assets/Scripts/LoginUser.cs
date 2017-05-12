@@ -67,7 +67,7 @@ public class LoginUser : MonoBehaviour {
       if (login.userId > 0)
       {
         //Store login data
-        GlobalData.Instance.SetLoginData = login;
+        DataStoring.Instance.SetLoginData = login;
 
         //Loads next scene
         if (nextScene != null)

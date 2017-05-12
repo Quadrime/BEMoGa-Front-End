@@ -13,7 +13,7 @@ public class PrepareData {
   /// <summary>Creates new form when first created</summary>
   public PrepareData ()
   {
-    GlobalData.Instance.Forms = new WWWForm();
+    DataStoring.Instance.Forms = new WWWForm();
   }
 
   /// <summary>Adds a string value and string field to the form to be sent to the server</summary>
@@ -21,7 +21,7 @@ public class PrepareData {
   /// <param name="value">String value to be sent</param>
   public void addField(string field, string value)
   {
-    GlobalData.Instance.Forms.AddField(field, value);
+    DataStoring.Instance.Forms.AddField(field, value);
   }
 
   /// <summary>Adds an int value and string field to the form to be sent to the server</summary>
@@ -29,7 +29,7 @@ public class PrepareData {
   /// <param name="value">Integer value to be sent</param>
   public void addField(string field, int value)
   {
-    GlobalData.Instance.Forms.AddField(field, value);
+    DataStoring.Instance.Forms.AddField(field, value);
   }
 
   /// <summary>Adds a float value and string field to the form to be sent to the server</summary>
@@ -37,7 +37,7 @@ public class PrepareData {
   /// <param name="value">Float value to be sent</param>
   public void addField(string field, float value)
   {
-    GlobalData.Instance.Forms.AddField(field, value.ToString());
+    DataStoring.Instance.Forms.AddField(field, value.ToString());
   }
 
   /// <summary>Adds a double value and string field to the form to be sent to the server</summary>
@@ -45,7 +45,7 @@ public class PrepareData {
   /// <param name="value">Double value to be sent</param>
   public void addField(string field, double value)
   {
-    GlobalData.Instance.Forms.AddField(field, value.ToString());
+    DataStoring.Instance.Forms.AddField(field, value.ToString());
   }
 
   /// <summary>Adds a bool value and string field to the form to be sent to the server</summary>
@@ -53,7 +53,7 @@ public class PrepareData {
   /// <param name="value">Boolean value to be sent</param>
   public void addField(string field, bool value)
   {
-    GlobalData.Instance.Forms.AddField(field, value.ToString());
+    DataStoring.Instance.Forms.AddField(field, value.ToString());
   }
   
   /// <summary>Transmits all data stored in forms to the server</summary>
@@ -61,12 +61,13 @@ public class PrepareData {
   /// <param name="monoBehaviour">MonoBehaviour of parent class to be used for Coroutine</param>
   public void transmitData(string URI, MonoBehaviour monoBehaviour)
   {
-    if (GlobalData.Instance.Forms != null)
+    if (DataStoring.Instance.Forms != null)
     {
-      UnityWebRequest www = UnityWebRequest.Post(URI, GlobalData.Instance.Forms);
+      UnityWebRequest www = UnityWebRequest.Post(URI, DataStoring.Instance.Forms);
       SendData send = new SendData();
       Debug.Log("Transfer of data started.");
       monoBehaviour.StartCoroutine(send.RequestDataTransfer(www));
+      clearData();
     }
     else
     {
@@ -76,7 +77,7 @@ public class PrepareData {
 
   public void clearData()
   {
-    GlobalData.Instance.Forms = null;
-    GlobalData.Instance.Forms = new WWWForm();
+    DataStoring.Instance.Forms = null;
+    DataStoring.Instance.Forms = new WWWForm();
   }
 }

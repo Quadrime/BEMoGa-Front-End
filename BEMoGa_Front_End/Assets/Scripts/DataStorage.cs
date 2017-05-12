@@ -5,23 +5,28 @@ using Utilities;
 
 namespace DataStorage
 {
-  public class GlobalData
+  /// <summary>
+  /// Class for storing data. Data persists troughout scenes.
+  /// WARNING! All DataReceptionContainer functions (found at the bottom) must be updated in accordance with each and every project. Create more as necessary.
+  /// </summary>
+  public class DataStoring
   {
     //Variables
     LoginContainer loginInfo = null;
-    private static GlobalData instance;
+    DataReceptionContainer dataContainer = null;
+    private static DataStoring instance;
     private static string serverPath = "http://localhost:3000/api/";
     private WWWForm forms = null;
 
     ///<summary>Get a reference to the Global Data object. There exists only one Global Data object and it lasts the entire duration of the application.</summary>
     ///<returns>Returns a reference to the Global Data object, if it doesn't exist already it will be created</returns>
-    public static GlobalData Instance
+    public static DataStoring Instance
     {
       get
       {
         if (instance == null)
         {
-          instance = new GlobalData();
+          instance = new DataStoring();
         }
         return instance;
       }
@@ -97,6 +102,40 @@ namespace DataStorage
     {
       get { return forms; }
       set { forms = value; }
+    }
+
+    /////////////////////////////////////////////////DataReceptionContainer functions///////////////////////////////////////////////////////
+    /// <summary>Stores data recieved from server</summary>
+    public DataReceptionContainer DataContainer
+    {
+      get { return dataContainer; }
+      set { dataContainer = value; }
+    }
+
+    /// <summary>Checks if DataContainer has anything useful or not</summary>
+    public bool DataContainerPresent
+    {
+      get {
+        if (dataContainer != null)
+        {
+          return true;
+        }
+        return false;
+      }
+    }
+
+    /// <summary>Stores and gives the stuff inside the dataContainer</summary>
+    public string DataContainerStuff
+    {
+      get { return dataContainer.stuff; }
+      set { dataContainer.stuff = value; }
+    }
+
+    /// <summary>Adds more stuff to the stuff in the DataContainer</summary>
+    /// <param name="moreStuff">String of stuff to be appended to DataContainer stuff</param>
+    public void AddToDataContainerStuff(string moreStuff)
+    {
+      dataContainer.stuff += moreStuff;
     }
   }
 }

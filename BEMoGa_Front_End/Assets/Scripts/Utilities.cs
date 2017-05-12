@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * Various containers and helpers for data transmissions and receptions.
- * May need to be updated for each project. Below is merely a suggestion.
- */ 
-namespace Utilities{
-
+///<summary>
+///Various containers and helpers for data transmissions and receptions.
+///May need to be updated for each project. Below is merely a suggestion.
+///WARNING! DataReceptionContainer (found at the bottom) must be updated in accordance with each and every project. Create more as necessary.
+///</summary>
+namespace Utilities
+{
   ///<summary>JSON container for errors</summary>
   [System.Serializable]
   public class ErrorContainer
@@ -88,5 +89,14 @@ namespace Utilities{
 
       return json;
     }
+  }
+
+  //////////////////////////////////////////////DataReceptionContainer/////////////////////////////////////////////////////
+  /// <summary>Container for data recieved from server. Create more similar containers if needed, but remember to update RecieveData.cs if this is necessary.</summary>
+  [System.Serializable]
+  public class DataReceptionContainer
+  {
+    //Example string
+    public string stuff;
   }
 }

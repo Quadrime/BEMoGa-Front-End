@@ -9,7 +9,7 @@ public class ExampleScript : MonoBehaviour {
 	void Start () {
     PrepareData stuff = new PrepareData();
     stuff.addField(floatExField, floatEx);
-    Debug.Log(GlobalData.Instance.Forms.ToString());
+    Debug.Log(DataStoring.Instance.Forms.ToString());
 	}
 	
 	// Update is called once per frame
