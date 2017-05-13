@@ -11,9 +11,10 @@ namespace DataStorage
   /// </summary>
   public class DataStoring
   {
-    //Variables
+    //Variables that are stored
     LoginContainer loginInfo = null;
-    DataReceptionContainer dataContainer = null;
+    ServerRespond dataRecieved = new ServerRespond();
+    DataReceptionContainer dataContainer = new DataReceptionContainer();
     private static DataStoring instance;
     private static string serverPath = "http://localhost:3000/api/";
     private WWWForm forms = null;
@@ -102,6 +103,15 @@ namespace DataStorage
     {
       get { return forms; }
       set { forms = value; }
+    }
+
+    /// <summary>Globally stored reception call from server</summary>
+    /// <param>String to replace current response with</param>
+    /// <returns>Returns string of currently stored response</returns>
+    public string Recieving
+    {
+      get { return dataRecieved.response; }
+      set { dataRecieved.response = value; }
     }
 
     /////////////////////////////////////////////////DataReceptionContainer functions///////////////////////////////////////////////////////

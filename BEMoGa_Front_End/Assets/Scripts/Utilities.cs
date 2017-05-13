@@ -91,6 +91,13 @@ namespace Utilities
     }
   }
 
+  /// <summary>Container for handling responses when posting something to the server</summary>
+  [System.Serializable]
+  public class ServerRespond
+  {
+    public string response;
+  }
+
   //////////////////////////////////////////////DataReceptionContainer/////////////////////////////////////////////////////
   /// <summary>Container for data recieved from server. Create more similar containers if needed, but remember to update RecieveData.cs if this is necessary.</summary>
   [System.Serializable]

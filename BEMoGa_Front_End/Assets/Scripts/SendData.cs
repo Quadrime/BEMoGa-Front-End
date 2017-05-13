@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using DataStorage;
 using Utilities;
 
 ///<summary>
@@ -24,6 +25,8 @@ public class SendData : MonoBehaviour {
       Debug.Log("Data transmission failed.\nError: " + www.error);
       yield break;
     }
+
+    DataStoring.Instance.Recieving = www.downloadHandler.text;
 
     ////Error status code
     //int statusCode = 0;
