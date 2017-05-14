@@ -20,7 +20,7 @@ public class SendData {
 
   public void SendSessionData(MonoBehaviour mono, string date = null, string sessionLocation = null, string sessionInfo = null)
   {
-    string url = DataStoring.Instance.ServerPath + "games/" + DataStoring.Instance.Game.id.ToString() + "/gameSessions";
+    string url = DataStoring.Instance.ServerPath + "games/" + DataStoring.Instance.Game.id.ToString() + "/gameSession";
     PrepareData pd = new PrepareData();
     if (date != null)
     {
