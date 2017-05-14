@@ -83,6 +83,38 @@ public class PrepareData {
     }
   }
 
+  public void transmitEventData(string URI, MonoBehaviour monoBehaviour)
+  {
+    if (DataStoring.Instance.Forms != null)
+    {
+      UnityWebRequest www = UnityWebRequest.Post(URI, DataStoring.Instance.Forms);
+      SendData send = new SendData();
+      Debug.Log("Transfer of data started.");
+      monoBehaviour.StartCoroutine(send.RequestEventDataTransfer(www));
+      clearData();
+    }
+    else
+    {
+      Debug.Log("Error: No data to transfer");
+    }
+  }
+
+  public void transmitSessionData(string URI, MonoBehaviour monoBehaviour)
+  {
+    if (DataStoring.Instance.Forms != null)
+    {
+      UnityWebRequest www = UnityWebRequest.Post(URI, DataStoring.Instance.Forms);
+      SendData send = new SendData();
+      Debug.Log("Transfer of data started.");
+      monoBehaviour.StartCoroutine(send.RequestSessionDataTransfer(www));
+      clearData();
+    }
+    else
+    {
+      Debug.Log("Error: No data to transfer");
+    }
+  }
+
   public void clearData()
   {
     DataStoring.Instance.Forms = null;

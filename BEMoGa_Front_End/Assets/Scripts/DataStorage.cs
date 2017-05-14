@@ -15,9 +15,9 @@ namespace DataStorage
     LoginContainer loginInfo = null;
     ServerRespond dataRecieved = new ServerRespond();
     DataReceptionContainer dataContainer = new DataReceptionContainer();
-    //GameContainer gameContainer = null;
-    //GameSessionContainer gameSessionContainer = null;
-    EventSessionContainer eventSeessionContainer = null;
+    GameContainer gameContainer = new GameContainer();
+    GameSessionContainer gameSessionContainer = new GameSessionContainer();
+    EventSessionContainer eventSeessionContainer = new EventSessionContainer();
     SessionIDContainer sessionContainer = new SessionIDContainer();
     Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
     private static DataStoring instance;
@@ -152,17 +152,17 @@ namespace DataStorage
       set { dataDictionary = value; }
     }
 
-    //public GameContainer Game
-    //{
-    //  get { return gameContainer; }
-    //  set { gameContainer = value; }
-    //}
+    public GameContainer Game
+    {
+      get { return gameContainer; }
+      set { gameContainer = value; }
+    }
 
-    //public GameSessionContainer Session
-    //{
-    //  get { return gameSessionContainer; }
-    //  set { gameSessionContainer = value; }
-    //}
+    public GameSessionContainer Session
+    {
+      get { return gameSessionContainer; }
+      set { gameSessionContainer = value; }
+    }
 
     public EventSessionContainer Event
     {

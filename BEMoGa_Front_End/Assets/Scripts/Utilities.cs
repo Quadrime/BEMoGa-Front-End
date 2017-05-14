@@ -81,21 +81,21 @@ namespace Utilities
     public string stuff;
   }
 
-  //[System.Serializable]
-  //public class GameContainer
-  //{
-  //  string id;
-  //}
+  [System.Serializable]
+  public class GameContainer
+  {
+    public int id = -1;
+  }
 
-  //[System.Serializable]
-  //public class GameSessionContainer
-  //{
-  //  int id;
-  //}
+  [System.Serializable]
+  public class GameSessionContainer
+  {
+    public int id = -1;
+  }
 
   [System.Serializable]
   public class EventSessionContainer
   {
-    int id;
+    public int id = -1;
   }
 }
