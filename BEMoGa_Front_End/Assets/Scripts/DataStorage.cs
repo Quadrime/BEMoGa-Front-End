@@ -211,5 +211,20 @@ namespace DataStorage
       get { return JsonUtility.FromJson<string>(dataContainer.stuff); }
       set { dataContainer.stuff = JsonUtility.FromJson<string>(value); }
     }
+
+    public bool CheckGameId
+    {
+      get { if (Game.id == -1 || Game.id == -2) return false; return true; }
+    }
+
+    public bool CheckSessionId
+    {
+      get { if (!CheckGameId || Session.id == -1 || Session.id == -2) return false; return true; }
+    }
+
+    public bool CheckEventId
+    {
+      get { if (!CheckSessionId || Event.id == -1 || Event.id == -2) return false; return true; }
+    }
   }
 }
