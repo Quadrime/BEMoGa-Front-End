@@ -57,41 +57,6 @@ namespace Utilities
     public int userId = -1;
   }
 
-  public class JsonHelper
-  {
-    ///<summary>Converts json array into object array. See https://forum.unity3d.com/threads/how-to-load-an-array-with-jsonutility.375735/ for more info.</summary>
-    ///<param name="json">JSON string to turn into an array</param>
-    ///<returns>Returns an array of the object type</returns>
-    public static T[] getJsonArray<T>(string json)
-    {
-
-      string newJson = "{ \"array\": " + json + "}";
-      Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
-      return wrapper.array;
-    }
-
-    ///<summary>Serializable wrapper class for getJsonArray function</summary>
-    [System.Serializable]
-    private class Wrapper<T>
-    {
-      public T[] array;
-    }
-
-    ///<summary>Quick hack for removing object around error object</summary>
-    ///<param name="json">JSON object to get subobject from</param>
-    ///<returns>Returns JSON string</returns>
-    public static string GetSubObject(string json)
-    {
-      //Remove "{ "error": " at the start of json
-      json = json.Remove(0, 9);
-
-      //Remove "}" at end of json
-      json = json.Remove(json.Length - 1);
-
-      return json;
-    }
-  }
-
   /// <summary>Container for handling responses when posting something to the server</summary>
   [System.Serializable]
   public class ServerRespond
@@ -108,12 +73,29 @@ namespace Utilities
     public string EventID;
   }
 
-  //////////////////////////////////////////////DataReceptionContainer/////////////////////////////////////////////////////
   /// <summary>Container for data recieved from server. Create more similar containers if needed, but remember to update RecieveData.cs if this is necessary.</summary>
   [System.Serializable]
   public class DataReceptionContainer
   {
     //Example string
     public string stuff;
+  }
+
+  //[System.Serializable]
+  //public class GameContainer
+  //{
+  //  string id;
+  //}
+
+  //[System.Serializable]
+  //public class GameSessionContainer
+  //{
+  //  int id;
+  //}
+
+  [System.Serializable]
+  public class EventSessionContainer
+  {
+    int id;
   }
 }

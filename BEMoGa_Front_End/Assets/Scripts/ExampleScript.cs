@@ -14,10 +14,11 @@ public class ExampleScript : MonoBehaviour {
 
     RecieveData getStuff = new RecieveData();
     getStuff.GetDataFromServer("kdrjgbdkrjgnkjrn", GetComponent<MonoBehaviour>());
-	}
+  }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
 }

@@ -55,7 +55,15 @@ public class PrepareData {
   {
     DataStoring.Instance.Forms.AddField(field, value.ToString());
   }
-  
+
+  /// <summary>Adds a bool value and string field to the form to be sent to the server</summary>
+  /// <param name="field">String name of database table field</param>
+  /// <param name="value">DateTime value to be sent</param>
+  public void addField(string field, System.DateTime value)
+  {
+    DataStoring.Instance.Forms.AddField(field, value.ToString("yyyy-MM-dd HH:mm:ss"));
+  }
+
   /// <summary>Transmits all data stored in forms to the server</summary>
   /// <param name="URI">URL adress of database table/API</param>
   /// <param name="monoBehaviour">MonoBehaviour of parent class to be used for Coroutine</param>

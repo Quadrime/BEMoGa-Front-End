@@ -15,7 +15,11 @@ namespace DataStorage
     LoginContainer loginInfo = null;
     ServerRespond dataRecieved = new ServerRespond();
     DataReceptionContainer dataContainer = new DataReceptionContainer();
+    //GameContainer gameContainer = null;
+    //GameSessionContainer gameSessionContainer = null;
+    EventSessionContainer eventSeessionContainer = null;
     SessionIDContainer sessionContainer = new SessionIDContainer();
+    Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
     private static DataStoring instance;
     private static string serverPath = "http://localhost:3000/api/";
     private WWWForm forms = null;
@@ -142,6 +146,30 @@ namespace DataStorage
       set { sessionContainer.EventID = value; }
     }
 
+    public Dictionary<string, string> ServerDataDictionary
+    {
+      get { return dataDictionary; }
+      set { dataDictionary = value; }
+    }
+
+    //public GameContainer Game
+    //{
+    //  get { return gameContainer; }
+    //  set { gameContainer = value; }
+    //}
+
+    //public GameSessionContainer Session
+    //{
+    //  get { return gameSessionContainer; }
+    //  set { gameSessionContainer = value; }
+    //}
+
+    public EventSessionContainer Event
+    {
+      get { return eventSeessionContainer; }
+      set { eventSeessionContainer = value; }
+    }
+
     /////////////////////////////////////////////////DataReceptionContainer functions///////////////////////////////////////////////////////
     /// <summary>Stores data recieved from server</summary>
     public DataReceptionContainer DataContainer
@@ -153,7 +181,8 @@ namespace DataStorage
     /// <summary>Checks if DataContainer has anything useful or not</summary>
     public bool DataContainerPresent
     {
-      get {
+      get
+      {
         if (dataContainer != null)
         {
           return true;

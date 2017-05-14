@@ -26,7 +26,9 @@ public class SendData {
       yield break;
     }
 
-    DataStoring.Instance.Recieving = JsonUtility.FromJson<string>(www.downloadHandler.text);
+    DataStoring.Instance.Event = JsonUtility.FromJson<EventSessionContainer>(www.downloadHandler.text);
+    
+
 
     ////Error status code
     //int statusCode = 0;
