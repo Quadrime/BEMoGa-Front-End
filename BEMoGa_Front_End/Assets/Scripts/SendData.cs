@@ -26,7 +26,7 @@ public class SendData : MonoBehaviour {
       yield break;
     }
 
-    DataStoring.Instance.Recieving = www.downloadHandler.text;
+    DataStoring.Instance.Recieving = JsonUtility.FromJson<string>(www.downloadHandler.text);
 
     ////Error status code
     //int statusCode = 0;
