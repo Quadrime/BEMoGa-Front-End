@@ -23,6 +23,14 @@ public class RecieveData {
     mono.StartCoroutine(RequestData(www));
   }
 
+  public void GetGameIdFromServer(string URI, MonoBehaviour mono)
+  {
+    //Create request
+    UnityWebRequest www = UnityWebRequest.Get(URI);
+    //Get the score
+    mono.StartCoroutine(RequestGameId(www));
+  }
+
   /// <summary>
   /// Sends a request to the server to recieve data.
   /// As it may take time to recieve the data from the server, the data is stored in DataStorage, where you must check if it has been updated or not (from an Update() function)
@@ -57,10 +65,26 @@ public class RecieveData {
     else
     {
       DataStoring.Instance.DataContainerStuff = www.downloadHandler.text;
-      //foreach (DataReceptionContainer data in objects)
-      //{
-      //  DataStoring.Instance.AddToDataContainerStuff(data.stuff);
-      //}
+
+      yield break;
+    }
+  }
+
+  public IEnumerator RequestGameIdData(UnityWebRequest www)
+  {
+    Debug.Log("1");
+    //Wait for response
+    yield return www.Send();
+    Debug.Log("2");
+    //Errors
+    if (www.error != null)
+    {
+      Debug.Log("Error while requesting data transfer from server:\n" + www.error);
+      yield break;
+    }
+    else
+    {
+      DataStoring.Instance.Game = JsonUtility.FromJson<GameContainer>(www.downloadHandler.text);
 
       yield break;
     }

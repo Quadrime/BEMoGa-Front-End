@@ -15,7 +15,7 @@ public class SendData {
   {
     string url = DataStoring.Instance.ServerPath + "games/getGameIdByName?pName=" + gameName;
     RecieveData rd = new RecieveData();
-    rd.GetDataFromServer(url, mono);
+    rd.GetGameIdFromServer(url, mono);
   }
 
   public void SendSessionData(MonoBehaviour mono, string date = null, string sessionLocation = null, string sessionInfo = null)

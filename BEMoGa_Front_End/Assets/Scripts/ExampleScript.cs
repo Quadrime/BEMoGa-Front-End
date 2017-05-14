@@ -14,7 +14,7 @@ public class ExampleScript : MonoBehaviour {
     {
       DataStoring.Instance.Game.id = -2;
       SendData send = new SendData();
-      send.GetGameID(GetComponent<MonoBehaviour>(), "GAMENAME");
+      send.GetGameID(GetComponent<MonoBehaviour>(), "exampleGame");
       Debug.Log("Sent game Id request");
     }
     else if (DataStoring.Instance.CheckGameId && DataStoring.Instance.Session.id != -2)
