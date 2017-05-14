@@ -30,13 +30,19 @@ public class ExampleScript : MonoBehaviour {
       SendData send = new SendData();
       send.SendSessionData(GetComponent<MonoBehaviour>());
     }
+    
     else if (DataStoring.Instance.Session.id != -2 && DataStoring.Instance.Event.id == -1)
     {
       DataStoring.Instance.Event.id = -2;
       SendData send = new SendData();
+      send.SendEventData(GetComponent<MonoBehaviour>(), "EVENTNAME");
+    }
+    else if (DataStoring.Instance.Event.id != -2)
+    {
+      SendData send = new SendData();
       send.SendValueData(GetComponent<MonoBehaviour>(), "VALUENAME", 34.4f);
     }
 
-	}
+  }
 
 }
