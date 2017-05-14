@@ -70,7 +70,7 @@ public class RecieveData {
     }
   }
 
-  public IEnumerator RequestGameIdData(UnityWebRequest www)
+  public IEnumerator RequestGameId(UnityWebRequest www)
   {
     Debug.Log("1");
     //Wait for response
@@ -84,7 +84,7 @@ public class RecieveData {
     }
     else
     {
-      DataStoring.Instance.Game = JsonUtility.FromJson<GameContainer>(www.downloadHandler.text);
+      DataStoring.Instance.Game.id = www.downloadHandler.text;
 
       yield break;
     }

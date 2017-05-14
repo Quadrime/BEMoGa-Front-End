@@ -214,7 +214,7 @@ namespace DataStorage
 
     public bool CheckGameId
     {
-      get { if (Game.id == -1 || Game.id == -2) return false; return true; }
+      get { if (Game.id == "-1" || Game.id == "-2") return false; return true; }
     }
 
     public bool CheckSessionId

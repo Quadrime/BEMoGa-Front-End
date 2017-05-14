@@ -84,7 +84,7 @@ namespace Utilities
   [System.Serializable]
   public class GameContainer
   {
-    public int id = -1;
+    public string id = "-1";
   }
 
   [System.Serializable]

@@ -10,9 +10,9 @@ public class ExampleScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    if (DataStoring.Instance.Game.id != -2)
+    if (DataStoring.Instance.Game.id != "-2")
     {
-      DataStoring.Instance.Game.id = -2;
+      DataStoring.Instance.Game.id = "-2";
       SendData send = new SendData();
       send.GetGameID(GetComponent<MonoBehaviour>(), "exampleGame");
       Debug.Log("Sent game Id request");
