@@ -20,13 +20,13 @@ public class ExampleScript : MonoBehaviour {
     else if (DataStoring.Instance.Game.id != -2 && DataStoring.Instance.Session.id == -1)
     {
       Debug.Log("GameId:" + DataStoring.Instance.Game.id);
-      DataStoring.Instance.Game.id = -2;
+      DataStoring.Instance.Session.id = -2;
       SendData send = new SendData();
       send.SendSessionData(GetComponent<MonoBehaviour>());
       Debug.Log("Sent sessionData");
     }
     
-    else if (DataStoring.Instance.Session.id != -2 && DataStoring.Instance.Event.id == -1)
+    else if (DataStoring.Instance.Game.id != -1 && DataStoring.Instance.Session.id != -2 && DataStoring.Instance.Event.id == -1)
     {
       Debug.Log("SessionId:" + DataStoring.Instance.Session.id);
       DataStoring.Instance.Event.id = -2;
@@ -34,7 +34,7 @@ public class ExampleScript : MonoBehaviour {
       send.SendEventData(GetComponent<MonoBehaviour>(), "EVENTNAME");
       Debug.Log("Sent eventData");
     }
-    else if (DataStoring.Instance.Event.id != -2)
+    else if (DataStoring.Instance.Game.id != -1 && DataStoring.Instance.Session.id != -1 && DataStoring.Instance.Event.id != -2)
     {
       Debug.Log("EventId:" + DataStoring.Instance.Event.id);
       SendData send = new SendData();
