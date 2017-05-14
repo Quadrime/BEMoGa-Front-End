@@ -9,7 +9,11 @@ public class ExampleScript : MonoBehaviour {
 	void Start () {
     PrepareData stuff = new PrepareData();
     stuff.addField(floatExField, floatEx);
+    stuff.transmitData("sbfskjfnk", GetComponent<MonoBehaviour>());
     Debug.Log(DataStoring.Instance.Forms.ToString());
+
+    RecieveData getStuff = new RecieveData();
+    getStuff.GetDataFromServer("kdrjgbdkrjgnkjrn", GetComponent<MonoBehaviour>());
 	}
 	
 	// Update is called once per frame

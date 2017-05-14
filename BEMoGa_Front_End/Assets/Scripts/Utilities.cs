@@ -64,6 +64,7 @@ namespace Utilities
     ///<returns>Returns an array of the object type</returns>
     public static T[] getJsonArray<T>(string json)
     {
+
       string newJson = "{ \"array\": " + json + "}";
       Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
       return wrapper.array;
@@ -96,6 +97,15 @@ namespace Utilities
   public class ServerRespond
   {
     public string response;
+  }
+
+  /// <summary>Session ID, GameID and EventID container for server storage</summary>
+  [System.Serializable]
+  public class SessionIDContainer
+  {
+    public string GameID;
+    public string SessionID;
+    public string EventID;
   }
 
   //////////////////////////////////////////////DataReceptionContainer/////////////////////////////////////////////////////

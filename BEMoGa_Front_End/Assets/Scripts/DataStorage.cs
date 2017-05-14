@@ -15,6 +15,7 @@ namespace DataStorage
     LoginContainer loginInfo = null;
     ServerRespond dataRecieved = new ServerRespond();
     DataReceptionContainer dataContainer = new DataReceptionContainer();
+    SessionIDContainer sessionContainer = new SessionIDContainer();
     private static DataStoring instance;
     private static string serverPath = "http://localhost:3000/api/";
     private WWWForm forms = null;
@@ -114,6 +115,33 @@ namespace DataStorage
       set { dataRecieved.response = value; }
     }
 
+    /// <summary>Globally stored gameID call from server, unique to each project</summary>
+    /// <param>String to replace current ID with</param>
+    /// <returns>Returns string of currently stored ID</returns>
+    public string GameId
+    {
+      get { return sessionContainer.GameID; }
+      set { sessionContainer.GameID = value; }
+    }
+
+    /// <summary>Globally stored unique session ID call from server, updated each time the game is started</summary>
+    /// <param>String to replace current ID with</param>
+    /// <returns>Returns string of currently stored ID</returns>
+    public string SessionId
+    {
+      get { return sessionContainer.SessionID; }
+      set { sessionContainer.SessionID = value; }
+    }
+
+    /// <summary>Globally stored unique eventID call from server, updated for each event per session</summary>
+    /// <param>String to replace current ID with</param>
+    /// <returns>Returns string of currently stored ID</returns>
+    public string EventId
+    {
+      get { return sessionContainer.EventID; }
+      set { sessionContainer.EventID = value; }
+    }
+
     /////////////////////////////////////////////////DataReceptionContainer functions///////////////////////////////////////////////////////
     /// <summary>Stores data recieved from server</summary>
     public DataReceptionContainer DataContainer
@@ -146,6 +174,13 @@ namespace DataStorage
     public void AddToDataContainerStuff(string moreStuff)
     {
       dataContainer.stuff += moreStuff;
+    }
+
+    /// <summary>Converts content of dataContainer to and from JSON</summary>
+    public string DataConvertJSON
+    {
+      get { return JsonUtility.FromJson<string>(dataContainer.stuff); }
+      set { dataContainer.stuff = JsonUtility.FromJson<string>(value); }
     }
   }
 }

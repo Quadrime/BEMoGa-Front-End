@@ -8,7 +8,7 @@ using Utilities;
 ///<summary>
 /// Sends .cs data to server.
 ///</summary>
-public class SendData : MonoBehaviour {
+public class SendData {
 
   /// <summary>Sends data to server and logs in user locally if succesful</summary>
   /// <param name="www">UnityWebRequest created by functions above</param>
