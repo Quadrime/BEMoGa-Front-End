@@ -9,61 +9,30 @@ using System;
 ///<summary>
 /// Sends .cs data to server.
 ///</summary>
-public class SendData {
+public class SendData
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="url"></param>
+    /// <param name="rawData"></param>
+    /// <returns></returns>
+    public IEnumerator httpRequest(string url, byte[] rawData)
+    {
+        // Post a request to an URL with our custom headers
+        WWW www = new WWW(url, rawData);
 
-
-
-
-
-  /// <summary>
-  /// 
-  /// </summary>
-  /// <param name="url"></param>
-  /// <param name="data"></param>
-  /// <returns></returns>
-  public IEnumerator InfluxRequest(string url,byte[] data)
-  {
+        yield return www;
         
-        UnityWebRequest request = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
-        UploadHandlerRaw MyUploadHandler = new UploadHandlerRaw(data);
-        MyUploadHandler.contentType = "application/x-www-form-urlencoded"; // might work with 'multipart/form-data'
-        request.uploadHandler = MyUploadHandler;
-        yield return request.Send();
-
-
-        if (request.isError)
+        if (www.responseHeaders.Count > 0)
         {
-            Debug.Log("Http request error: " + request.error);
-            if (request.downloadHandler != null)
+            foreach (KeyValuePair<string, string> entry in www.responseHeaders)
             {
-                Debug.Log(request.downloadedBytes);
+                Debug.Log(entry.Key + "=" + entry.Value);
             }
         }
-        else
-        {
-            if (request.responseCode == 204)
-            {
-                Debug.Log("Post sucessfull" + request.responseCode);
-                // no point printing the result, 204comes back with an empty body.
-            }
-            else if (request.responseCode == 401)
-            {
-                Debug.Log("Error 401: Unauthorized.");
-                if (request.downloadHandler.text != null)
-                {
-                    Debug.Log(request.downloadHandler.text);
-                }
 
-            }
-
-            else
-            {
-                Debug.Log("Request failed (status:" + request.responseCode + ").");
-                if (request.downloadHandler.text != null)
-                {
-                    Debug.Log(request.downloadHandler.text);
-                }
-            }
-        }
+        Debug.Log(www.text);
     }
 }
+

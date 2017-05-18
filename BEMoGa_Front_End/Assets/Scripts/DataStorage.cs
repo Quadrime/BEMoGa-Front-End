@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
@@ -14,8 +15,9 @@ namespace DataStorage
         //DataReceptionContainer dataContainer = new DataReceptionContainer();
         Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
         private static DataStoring instance;
-        private static string influxWrite = "http://localhost:8086/write?db="; // should also be changed probably
+        private static string serverURL = "http://localhost:8086";
         private static string _db = "test_db"; // Change this
+
 
         ///<summary>Get a reference to the Global Data object. There exists only one Global Data object and it lasts the entire duration of the application.</summary>
         ///<returns>Returns a reference to the Global Data object, if it doesn't exist already it will be created</returns>
@@ -31,10 +33,33 @@ namespace DataStorage
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string getServerURL()
         {
-            return influxWrite;
+            return serverURL;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string getQueryURl()
+        {
+            var url = getServerURL() + "/query";
+            return url;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string getWriteURl()
+        {
+            var url = getServerURL()+"/write?db=" + getNameDB();
+            return url;
         }
 
         /// <summary>
@@ -46,6 +71,10 @@ namespace DataStorage
             _db = newName;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string getNameDB()
         {
             return _db;

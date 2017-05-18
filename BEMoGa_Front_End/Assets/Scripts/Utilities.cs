@@ -9,27 +9,29 @@ using UnityEngine;
 ///</summary>
 namespace Utilities
 {
-  ///<summary>JSON container for errors</summary>
-  /// See the sendData for example
-  [System.Serializable]
-  public class ErrorContainer
-  {
-    //Error type, example "Error"
-    public string name = "Null";
+    ///<summary>JSON container for errors</summary>
+    /// See the sendData for example
+    [System.Serializable]
+    public class ErrorContainer
+    {
+        //Error type, example "Error"
+        public string name = "Null";
 
-    //code 401 example
-    public int status = -1;
+        //code 401 example
+        public int status = -1;
 
-    //Error message
-    public string message = "Null";
+        //Error message
+        public string message = "Null";
 
-    //code 401 example
-    public int statusCode = -1;
+        //code 401 example
+        public int statusCode = -1;
 
-    //All caps code
-    public string code = "Null";
+        //All caps code
+        public string code = "Null";
 
-    //Stack trace to js code line
-    public string stack = "Null";
-  }
+        //Stack trace to js code line
+        public string stack = "Null";
+    }
+
+   
 }
