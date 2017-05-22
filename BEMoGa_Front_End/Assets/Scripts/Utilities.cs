@@ -9,7 +9,7 @@ using UnityEngine;
 ///</summary>
 namespace Utilities
 {
-    ///<summary>JSON container for errors</summary>
+    ///<summary>HTTP container for errors</summary>
     /// See the sendData for example
     [System.Serializable]
     public class ErrorContainer

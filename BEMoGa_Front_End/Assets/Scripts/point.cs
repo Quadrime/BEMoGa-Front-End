@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 
 
 
-public class point {
+public class Point {
 
     /// <summary>
     /// REQUIRED
@@ -40,7 +40,7 @@ public class point {
     /// <summary>
     /// Constructor
     /// </summary>
-    public point(){
+    public Point(){
         _measurement = null;
         _fields = new Dictionary<string, string>();
         _tags = new Dictionary<string, string>();
@@ -51,7 +51,7 @@ public class point {
     /// Constructor
     /// </summary>
     /// <param name="measurement"></param>
-    public point(string measurement)
+    public Point(string measurement)
     {
          this._measurement = measurement;
         _fields = new Dictionary<string, string>();
@@ -121,7 +121,10 @@ public class point {
         return bytes;
     }
 
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public string getLineProtocol()
     {
         return buildLineProtocol();
@@ -134,7 +137,6 @@ public class point {
     private string buildLineProtocol()
     {
         StringBuilder sb = new StringBuilder();
-
         sb.Append(this._measurement);
        
 

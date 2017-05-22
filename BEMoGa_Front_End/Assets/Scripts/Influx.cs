@@ -3,16 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Utilities;
-using DataStorage;
+using InfluxBemoga;
 
 /// <summary>
-/// Prepares data for transfer
+/// Influx script takes care of the transfer od data. It uses the
+/// InfluxData class to get data as username, password.
 /// This is a lightweight wrapper.
 /// Covering all the possible query and write functionality
 /// for influx db will not be covered. Only the basic forms
 /// </summary>
-public class PrepareData
+public class Influx
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Influx()
+    {
+
+    }
+
+    /// <summary>
+    ///  Writes a point upon creation
+    /// </summary>
+    /// <param name="mono"></param>
+    /// <param name="point"></param>
+    public Influx(MonoBehaviour mono, Point point)
+    {
+        writeMeasurment(mono, point);
+    }
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -21,22 +42,22 @@ public class PrepareData
     public void getQuery(MonoBehaviour mono, string query)
     {
         WWWForm form = new WWWForm();
-        form.AddField("db", DataStoring.Instance.getNameDB());
+        form.AddField("db", InfluxData.Instance.getNameDB());
         form.AddField("q", query);
 
-        var url = DataStoring.Instance.getQueryURl();
+        var url = InfluxData.Instance.getQueryURl();
 
         SendData sd = new SendData();
         var bytes = form.data;
         mono.StartCoroutine(sd.httpRequest(url, bytes));
     }
-
+    /* ------------------Remove when time is close.......................................
     public void test(MonoBehaviour mono)
     {
         WWWForm form = new WWWForm();
-        string url = DataStoring.Instance.getQueryURl();
+        string url = InfluxData.Instance.getQueryURl();
         Debug.Log(url);
-        form.AddField("db", DataStoring.Instance.getNameDB());
+        form.AddField("db", InfluxData.Instance.getNameDB());
         form.AddField("q", "show series");
         SendData sd = new SendData();
         var bytes = form.data;
@@ -48,7 +69,7 @@ public class PrepareData
  
         
             WWWForm form = new WWWForm();
-            string url = DataStoring.Instance.getWriteURl();
+            string url = InfluxData.Instance.getWriteURl();
             Debug.Log(url);
             string data = "cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000";
             SendData sd = new SendData();
@@ -57,7 +78,8 @@ public class PrepareData
         
 
     }
-
+        .....................................................................
+    */
     /// <summary>
     /// Request a query with WWWform
     /// </summary>
@@ -65,7 +87,7 @@ public class PrepareData
     /// <param name="form"></param>
     public void getQuery(MonoBehaviour mono, WWWForm form)
     {
-        var url = DataStoring.Instance.getQueryURl();
+        var url = InfluxData.Instance.getQueryURl();
         SendData sd = new SendData();
         var bytes = form.data;
         mono.StartCoroutine(sd.httpRequest(url, bytes));
@@ -80,7 +102,7 @@ public class PrepareData
     public void getQuery(MonoBehaviour mono, string query, string url)
     {
         WWWForm form = new WWWForm();
-        form.AddField("db", DataStoring.Instance.getNameDB());
+        form.AddField("db", InfluxData.Instance.getNameDB());
         form.AddField("q", query);
 
         SendData sd = new SendData();
@@ -108,7 +130,7 @@ public class PrepareData
     /// <param name="data"></param>
     public void writeMeasurment(MonoBehaviour mono, string data)
     {
-        var url = DataStoring.Instance.getWriteURl();
+        var url = InfluxData.Instance.getWriteURl();
 
         SendData sd = new SendData();
         var bytes = System.Text.Encoding.UTF8.GetBytes(data);
@@ -120,9 +142,9 @@ public class PrepareData
     /// </summary>
     /// <param name="mono"></param>
     /// <param name="p"></param>
-    public void writeMeasurment(MonoBehaviour mono, point p)
+    public void writeMeasurment(MonoBehaviour mono, Point p)
     {
-        var url = DataStoring.Instance.getWriteURl();
+        var url = InfluxData.Instance.getWriteURl();
         SendData sd = new SendData();
         var bytes = p.toBinary();
         mono.StartCoroutine(sd.httpRequest(url, bytes));
@@ -147,7 +169,7 @@ public class PrepareData
     /// <param name="mono"></param>
     /// <param name="p"></param>
     /// <param name="url"></param>
-    public void writeMeasurment(MonoBehaviour mono, point p, string url)
+    public void writeMeasurment(MonoBehaviour mono, Point p, string url)
     {
         SendData sd = new SendData();
         var bytes = p.toBinary();

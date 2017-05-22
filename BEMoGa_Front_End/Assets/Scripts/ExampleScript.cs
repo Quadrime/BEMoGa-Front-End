@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using DataStorage;
+using InfluxBemoga;
 
 public class dummy
 {
@@ -41,16 +41,18 @@ public class dummy
 
 }
 
-public class ExampleScript : MonoBehaviour {
+public class ExampleScript : MonoBehaviour
+{
 
     // Use this for initialization
-    PrepareData pd = new PrepareData();
+    Influx pd = new Influx();
     float period = 0.0f;
 
-    void Start () {
+    void Start()
+    {
 
 
-        pd.test1(GetComponent<MonoBehaviour>());
+        // pd.test1(GetComponent<MonoBehaviour>());
 
     }
 
@@ -68,10 +70,10 @@ public class ExampleScript : MonoBehaviour {
 
     }
 
-   void createAndDominate()
+    void createAndDominate()
     {
         dummy d = new dummy();
-        point p = new point("dummy_metric");
+        Point p = new Point("dummy_metric");
         p.addTag("AIname", d.name);
         p.addTag("host", "unity5.6");
         p.addField("valueOne", d.values[0]);
@@ -84,23 +86,3 @@ public class ExampleScript : MonoBehaviour {
 
 
 }
-//PrepareData pr = new PrepareData();
-//string data = "cpu_load_another,host=server02,region=us-east value=0.64 1434055562000000000";
-//string test = "dummy_metric,AIname=dummy2,host=eskil valueOne=0.405,valueTwo=232.5,age=23i,isFemale=true, 2434354353554354";
-//point p = new point("cpu_load_another");
-//p.addTag("host", "triforce");
-//p.addTag("region", "norway");
-//p.addField<float>("value", 0.64f);
-//p.addField<string>("secondValue", "test");
-//System.DateTime? time = System.DateTime.UtcNow;
-//p.addTimestamp(time);
-//pr.writeMeasurment(GetComponent<MonoBehaviour>(), data);
-//pr.getQuery(GetComponent<MonoBehaviour>(), "SELECT \"value\" FROM \"cpu_load_short\" WHERE \"region\"='us-west'");
-//pr.writeMeasurment(GetComponent<MonoBehaviour>() , p);
-//point a = new point("cpu_load_another");
-//a.addTag("host", "triforce");
-//a.addTag("region", "norway");
-//a.addField<float>("value", 0.64f);
-//a.addField<bool>("thirdvalue",true);
-//a.addField("fourthvalue", 12);
-//pr.writeMeasurment(GetComponent<MonoBehaviour>(),a);
