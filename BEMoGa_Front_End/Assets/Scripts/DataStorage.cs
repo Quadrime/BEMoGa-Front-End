@@ -8,15 +8,17 @@ namespace DataStorage
 {
     /// <summary>
     /// Class for storing data. Data persists troughout scenes.
-    /// WARNING! All DataReceptionContainer functions (found at the bottom) must be updated in accordance with each and every project. Create more as necessary.
     /// </summary>
     public class DataStoring
     {
-        //DataReceptionContainer dataContainer = new DataReceptionContainer();
         Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
         private static DataStoring instance;
-        private static string serverURL = "http://localhost:8086";
-        private static string _db = "test_db"; // Change this
+
+        // specific data for onecity. Consider moving to config file for other projects
+        private string _serverURL = "http://localhost:8086";            // URL of the server
+        private string _username  = "writer";                           // username for access the database
+        private string _passowrd  = "1234pass";                         // password for access the database
+        private string _db        = "test_db";                          // Name of the database
 
 
         ///<summary>Get a reference to the Global Data object. There exists only one Global Data object and it lasts the entire duration of the application.</summary>
@@ -39,7 +41,7 @@ namespace DataStorage
         /// <returns></returns>
         public string getServerURL()
         {
-            return serverURL;
+            return this._serverURL;
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ namespace DataStorage
         /// <returns></returns>
         public string getQueryURl()
         {
-            var url = getServerURL() + "/query";
+            var url = _serverURL + "/query?u="+_username+"&p="+_passowrd;
             return url;
         }
         
@@ -58,7 +60,7 @@ namespace DataStorage
         /// <returns></returns>
         public string getWriteURl()
         {
-            var url = getServerURL()+"/write?db=" + getNameDB();
+            var url = _serverURL+"/write?db="+_db + "&u="+_username+"&p="+_passowrd;
             return url;
         }
 
@@ -78,6 +80,42 @@ namespace DataStorage
         public string getNameDB()
         {
             return _db;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string getUsername()
+        {
+            return this._username;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        public void setUsername(string username)
+        {
+            this._username = username;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string getPassword()
+        {
+            return this._passowrd;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="password"></param>
+        public void sePassword(string password)
+        {
+            this._passowrd = password;
         }
     }
 }

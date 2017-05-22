@@ -31,6 +31,33 @@ public class PrepareData
         mono.StartCoroutine(sd.httpRequest(url, bytes));
     }
 
+    public void test(MonoBehaviour mono)
+    {
+        WWWForm form = new WWWForm();
+        string url = DataStoring.Instance.getQueryURl();
+        Debug.Log(url);
+        form.AddField("db", DataStoring.Instance.getNameDB());
+        form.AddField("q", "show series");
+        SendData sd = new SendData();
+        var bytes = form.data;
+        mono.StartCoroutine(sd.httpRequest(url, bytes));
+    }
+
+    public void test1(MonoBehaviour mono)
+    {
+ 
+        
+            WWWForm form = new WWWForm();
+            string url = DataStoring.Instance.getWriteURl();
+            Debug.Log(url);
+            string data = "cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000";
+            SendData sd = new SendData();
+        var bytes = System.Text.Encoding.UTF8.GetBytes(data);
+        mono.StartCoroutine(sd.httpRequest(url, bytes));
+        
+
+    }
+
     /// <summary>
     /// Request a query with WWWform
     /// </summary>

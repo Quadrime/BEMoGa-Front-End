@@ -48,8 +48,9 @@ public class ExampleScript : MonoBehaviour {
     float period = 0.0f;
 
     void Start () {
-    
-    //   Debug.Log( p.getLineProtocol());
+
+
+        pd.test1(GetComponent<MonoBehaviour>());
 
     }
 
@@ -57,13 +58,13 @@ public class ExampleScript : MonoBehaviour {
     // Update is used here to make sure everything is created and sent to the server
     void Update()
     {
-        if(period > 2.0f)
-        {
-            createAndDominate();
-            period = 0;
-        }
+        //if(period > 2.0f)
+        //{
+        //    createAndDominate();
+        //    period = 0;
+        //}
 
-        period += UnityEngine.Time.deltaTime;
+        //period += UnityEngine.Time.deltaTime;
 
     }
 
