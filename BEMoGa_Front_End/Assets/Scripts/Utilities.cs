@@ -5,7 +5,7 @@ using UnityEngine;
 ///<summary>
 /// Utilties used by the influx bemoga wrapper
 ///</summary>
-namespace Utilities
+namespace InfluxBemoga
 {
     [System.Serializable]
     public class influxUtil
