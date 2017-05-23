@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using InfluxBemoga;
-
 public class dummy
 {
     public string name = null;
@@ -50,9 +48,17 @@ public class ExampleScript : MonoBehaviour
 
     void Start()
     {
+        //InfluxBemoga.InfluxData.Instance.BemogaPrint();
+        // pd.usePrint(true);
+        pd.getInfluxData().BemogaPrint();
+        //pd.test(GetComponent<MonoBehaviour>());
 
 
-        // pd.test1(GetComponent<MonoBehaviour>());
+
+        pd.usePrint(true);
+        Point point = new Point("test");
+        point.addField<float>("value",1.69f);
+        pd.writeMeasurment(GetComponent<MonoBehaviour>(),point);
 
     }
 

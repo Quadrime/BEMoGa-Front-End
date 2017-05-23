@@ -38,7 +38,7 @@ public class Point {
 
 
     /// <summary>
-    /// Constructor
+    /// Creates a point with none of the values set
     /// </summary>
     public Point(){
         _measurement = null;
@@ -48,9 +48,9 @@ public class Point {
     }
 
     /// <summary>
-    /// Constructor
+    /// Creates a Point with measurement already set
     /// </summary>
-    /// <param name="measurement"></param>
+    /// <param name="measurement">String measurment, can not be null  or empty</param>
     public Point(string measurement)
     {
          this._measurement = measurement;
@@ -62,7 +62,7 @@ public class Point {
     /// <summary>
     /// Add a measurement
     /// </summary>
-    /// <param name="measurement"></param>
+    /// <param name="measurement">String measurment, can not be null  or empty</param>
     public void addMeasurement(string measurement)
     {
         this._measurement = measurement;
@@ -71,9 +71,9 @@ public class Point {
     /// <summary>
     ///  Add a field with the correct syntax format
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="fieldKey"></param>
-    /// <param name="value"></param>
+    /// <typeparam name="T"> Generic</typeparam>
+    /// <param name="fieldKey">String key, can not be empty or null</param>
+    /// <param name="value"> T Value, can be int, string, float or bool</param>
     public void addField<T>(string fieldKey, T value)
     {
         if(value is int)
@@ -91,10 +91,10 @@ public class Point {
         this._fields.Add(fieldKey, value.ToString());
     }
     /// <summary>
-    ///  Add a tag
+    ///  Add a tag to the point
     /// </summary>
-    /// <param name="tagKey"></param>
-    /// <param name="tagValue"></param>
+    /// <param name="tagKey">String, should not be null</param>
+    /// <param name="tagValue">string, the value</param>
     public void addTag(string tagKey, string tagValue)
     {
         this._tags.Add(tagKey, tagValue);
@@ -103,37 +103,36 @@ public class Point {
     /// <summary>
     /// Add a timestamp, need to be of utc format
     /// </summary>
-    /// <param name="time"></param>
+    /// <param name="time">UTC date time, required. </param>
     public void addTimestamp(DateTime? time)
     {
         this._timestamp = time;
     }
 
     /// <summary>
-    /// Parse the point to binary data
+    /// Convert a lineProtocol to a string
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Byte array for use in transmission </returns>
     public byte[] toBinary()
     {
         var data = buildLineProtocol();
-        Debug.Log(data);
         var bytes = System.Text.Encoding.UTF8.GetBytes(data);
         return bytes;
     }
 
     /// <summary>
-    /// 
+    /// Get a lineprotocol from a point
     /// </summary>
-    /// <returns></returns>
+    /// <returns> Returns a point as a string </returns>
     public string getLineProtocol()
     {
         return buildLineProtocol();
     }
     
     /// <summary>
-    ///  build the line protocol line from the point
+    ///  build the line protocol line from the point.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Returns the lineprotocol that is supposed to look for data transmission as a line/string </returns>
     private string buildLineProtocol()
     {
         StringBuilder sb = new StringBuilder();
@@ -175,6 +174,7 @@ public class Point {
 
     /// <summary>
     /// Check if the format is valid type
+    /// Throws an argument exception on fail
     /// </summary>
     private void isValid()
     {
@@ -199,9 +199,9 @@ public class Point {
     }
 
     /// <summary>
-    /// Set correct time format
+    /// Set the timeformat to utc
     /// </summary>
-    /// <param name="utcTimestamp"></param>
+    /// <param name="utcTimestamp"> Required that the datetime is of utcTimeStamp</param>
     /// <returns></returns>
     private static string formatTimestamp(DateTime utcTimestamp)
     {

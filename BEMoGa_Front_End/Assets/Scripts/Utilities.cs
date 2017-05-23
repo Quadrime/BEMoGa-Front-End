@@ -3,35 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 ///<summary>
-///Various containers and helpers for data transmissions and receptions.
-///May need to be updated for each project. Below is merely a suggestion.
-///WARNING! DataReceptionContainer (found at the bottom) must be updated in accordance with each and every project. Create more as necessary.
+/// Utilties used by the influx bemoga wrapper
 ///</summary>
 namespace Utilities
 {
-    ///<summary>HTTP container for errors</summary>
-    /// See the sendData for example
     [System.Serializable]
-    public class ErrorContainer
+    public class influxUtil
     {
-        //Error type, example "Error"
-        public string name = "Null";
+        // Determine if we are going to print the results
+        private bool usePrint = false;
 
-        //code 401 example
-        public int status = -1;
+        /// <summary>
+        /// Set the usePrint to the parameter
+        /// </summary>
+        /// <param name="print"> bool object </param>
+        public void setUsePrint(bool print)
+        {
+            this.usePrint = print;
+        }
 
-        //Error message
-        public string message = "Null";
-
-        //code 401 example
-        public int statusCode = -1;
-
-        //All caps code
-        public string code = "Null";
-
-        //Stack trace to js code line
-        public string stack = "Null";
+        /// <summary>
+        /// Get if the print is active or not
+        /// </summary>
+        /// <returns>returns true if we shall print, false if not</returns>
+        public bool isPrint()
+        {
+            return this.usePrint;
+        }
     }
-
-   
 }

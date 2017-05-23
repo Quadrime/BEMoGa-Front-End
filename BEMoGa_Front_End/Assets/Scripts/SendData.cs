@@ -15,11 +15,16 @@ public class SendData
     /// 
     /// </summary>
     string text = null;
-    Dictionary<string,string> headerResponse = null;
-
 
     /// <summary>
     /// 
+    /// </summary>
+    Dictionary<string,string> headerResponse = null;
+
+    bool usePrint = false;
+
+    /// <summary>
+    /// Create a data with usePrint set as false
     /// </summary>
     public SendData()
     {
@@ -27,10 +32,20 @@ public class SendData
     }
 
     /// <summary>
-    /// 
+    /// Create a SendData with usePrint
     /// </summary>
-    /// <param name="url"></param>
-    /// <param name="rawData"></param>
+    /// <param name="usePrint"></param>
+    public SendData(bool usePrint)
+    {
+        this.usePrint = usePrint;
+        this.headerResponse = new Dictionary<string, string>();
+    }
+
+    /// <summary>
+    /// Request an JTTP. PRint if usePrint is true.
+    /// </summary>
+    /// <param name="url"> Url of the targeted Influx DB</param>
+    /// <param name="rawData">Data that we send to the Influx DB</param>
     /// <returns></returns>
     public IEnumerator httpRequest(string url, byte[] rawData)
     {
@@ -38,31 +53,28 @@ public class SendData
         WWW www = new WWW(url, rawData);
         yield return www;
 
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="url"></param>
-    /// <param name="rawData"></param>
-    /// <returns></returns>
-    public IEnumerator httpRequestWithPrint(string url, byte[] rawData)
-    {
-        // Post a request to an URL with our custom headers
-        WWW www = new WWW(url, rawData);
-        yield return www;
-
-        if (www.responseHeaders.Count > 0)
+        if (this.usePrint)
         {
-            this.headerResponse = www.responseHeaders;
+            if (www.responseHeaders.Count > 0 && www.responseHeaders != null)
+            {
+                foreach (var entry in www.responseHeaders)
+                {
+                    Debug.Log(entry.Key + "=" + entry.Value);
+                }
+            }
+
+            if (!String.IsNullOrEmpty(www.text))
+            {
+                Debug.Log(www.text);
+            }
         }
- 
-        this.text = www.text;
-        printData();
+
+
     }
 
+
     /// <summary>
-    /// 
+    /// Debug purpose
     /// </summary>
     public void printHeader()
     {
@@ -77,18 +89,18 @@ public class SendData
     }
 
     /// <summary>
-    /// 
+    /// Debug Purpose
     /// </summary>
     public void printText()
     {
-        if(String.IsNullOrEmpty(text))
+        if(!String.IsNullOrEmpty(text))
         {
             Debug.Log(text);
         }
     }
 
     /// <summary>
-    /// 
+    /// Debug Purpose
     /// </summary>
     public void printData()
     {
