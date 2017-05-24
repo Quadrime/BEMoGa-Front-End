@@ -1,7 +1,5 @@
 # BEMoGA
 ![alt text](http://prod3.imt.hig.no/BEMoGa/Front-End/raw/e250c0e3db40dd2532ee8baa6b18aa2218b757cd/bemogaLoga.png)
-
-https://drive.google.com/file/d/0B52ZDxt0gL8jZnlrVG5VRlY3cVk/view?usp=sharing
 BEMoGa is a back-end for educational mobile games to store metrics and in-game events about their game. BEMoGa make use of InfluxDB as their database back-end server and a simple lightweight api in unity to commuincate with the database. Additioanlly BEMoGa has been using grafana as the tool to visualize the data metrics from InfluxDB
 
 Tools that BEMoGa requires or are recommended:
