@@ -65,10 +65,7 @@ public class ExampleScript : MonoBehaviour
 
         //Tells the influx class to print out everything it does to console
         influx.usePrint(true);
-        influx.getInfluxData().setNameDB("test_db");
-        influx.getInfluxData().setPassword("1234pass");
-        influx.getInfluxData().setUsername("writer");
-        influx.getInfluxData().BemogaPrint();
+
         ExampleWriter();
         ExampleQuery();
     }
