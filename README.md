@@ -4,13 +4,17 @@
 BEMoGa is a back-end for educational mobile games to store metrics and in-game events about their game.
 BEMoGa make use of InfluxDB as their database back-end server and a simple lightweight api in unity to commuincate with the database. Additioanlly BEMoGa has been using grafana as the tool to visualize the data metrics from InfluxDB
 
+
 Tools that BEMoGa requires or are recommended:
   * [InfluxDB](https://www.influxdata.com/) - Is required. Download the localhost if you have no access to already hosted InfluxDB.
   * [Grafana](http://staging.grafana.org/) - Is optional. It is used for visualization for influxDB data instead of command line. Other alternative can of course be used.
   * [Unity](https://madewith.unity.com/) - Is required. All our code to interact with an InfluxDB is done in unity. 
 
+
 # Code Example
+
 First you can set the Config variables. They are default null, except the server url which default to the localhost of InfluxDB. A example of a config setup is given below:
+
 ```csharp
 static class Config
 {
@@ -20,7 +24,8 @@ static class Config
         public static string password = "1234pass"; 
 }
 ```
-So when the config is setup. You can use the InfluxDB on Unity very simply by adding the BEMoGa script folder to your project. After that you can write to your influxDB. Remember InfluxDB will always require DB a measurements, and atleast one field. Go to influxDB documentation on their own website to read more about this.
+
+So when the config is setup. You can use the InfluxDB on Unity very simply by adding the BEMoGa script folder to your project. After that you can write to your influxDB. Remember InfluxDB will always require a measurements, and atleast one field. Go to influxDB documentation on their own website to read more about this.
 ```csharp
     Influx influx = new Influx();
     public void Start()
@@ -44,6 +49,7 @@ And to query...
 ```csharp
     influx.getQuery(GetComponent<MonoBehaviour>(),"SELECT * FROM dummy_metric",true);
 ```
+
 Result will look like this for example:
 ```csharp
 {
