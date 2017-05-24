@@ -13,19 +13,19 @@ namespace InfluxBemoga
         // But if you wannt, you can change these, 
         // and upon game start. It will set these values
 
-        public static string dbname = "test_db";                       // REQUIRED: Default NULL. Need to be set before using influx, can be set runtime
-        public static string serverURL = "http://localhost:8086";      // REQUIRED: Default: http://localhost:8086
-        public static string username = "writer";                      // OPTIONAL: Default NULL
-        public static string password = "1234pass";                    // OPTIONAL: Default NULL
+        public static string dbname = null;         // REQUIRED: Default NULL. Need to be set before using influx, can be set runtime
+        public static string serverURL = null;      // REQUIRED: Default: http://localhost:8086
+        public static string username = null;       // OPTIONAL: Default NULL
+        public static string password = null;       // OPTIONAL: Default NULL 
 
         /* 
-         * EXAMPLE how it can look
-         * -----------------------------------
-         * public static string dbname = "test_db"      
-         * public static string serverURL ="http://localhost:8086";      
-         * public static string username = "writer";      
-         * public static string password = "1234Pass;      
-         * 
+             EXAMPLE how it can look
+             -----------------------------------
+           public static string dbname = "test_db";                       // REQUIRED: Default NULL. Need to be set before using influx, can be set runtime
+           public static string serverURL = "http://localhost:8086";      // REQUIRED: Default: http://localhost:8086
+           public static string username = "writer";                      // OPTIONAL: Default NULL
+           public static string password = "1234pass";                    // OPTIONAL: Default NULL  
+
          */
 
 

@@ -63,11 +63,15 @@ namespace InfluxBemoga
         /// Gives the query url with username and password if both exist.
         /// Else it will give the standard query url with no username and password
         /// </summary>
+        /// <param name="pretty"> If it is true, you will get a more pretty format back. 
+        /// Not recommended because of performance.
+        /// </param>
         /// <returns>Returns a string that contains query url </returns>
-        public string getQueryURl()
+        public string getQueryURl(bool pretty = false)
         {
             if (hasUserAndPass())
-                return this._serverURL + "/query?u="+_username+"&p="+_password;
+                return (pretty)? this._serverURL + "/query?pretty=true&u=" + _username+"&p="+_password :
+                                 this._serverURL + "/query?u=" + _username + "&p=" + _password;
 
             return this._serverURL + "/query";              
         }

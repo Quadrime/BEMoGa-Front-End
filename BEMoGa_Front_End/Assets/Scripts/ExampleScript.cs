@@ -51,6 +51,7 @@ public class ExampleScript : MonoBehaviour
 
     // Use this for initialization
     Influx influx = new Influx();
+    
     float period = 0.0f;
 
     /// <summary>
@@ -64,8 +65,12 @@ public class ExampleScript : MonoBehaviour
 
         //Tells the influx class to print out everything it does to console
         influx.usePrint(true);
-
+        influx.getInfluxData().setNameDB("test_db");
+        influx.getInfluxData().setPassword("1234pass");
+        influx.getInfluxData().setUsername("writer");
+        influx.getInfluxData().BemogaPrint();
         ExampleWriter();
+        ExampleQuery();
     }
 
     /// <summary>
@@ -75,7 +80,7 @@ public class ExampleScript : MonoBehaviour
     {
         //Simply creates the dummy class containing arbitrary values
         dummy d = new dummy();
-
+        
         ////Creates a new point with a preset measurement (database)
         Point p = new Point("dummy_metric");
 
@@ -91,12 +96,27 @@ public class ExampleScript : MonoBehaviour
         p.addField("age", d.age);
         p.addField("isFemale", d.isFemale);
 
-        //Adding timestamps are optional, as the Influx database autogenerates them if they are not given during transmit
+        //Adding timestamps are optional, as the Influx database autogenerates(server time, which need to be noted) them if they are not given during transmit
         p.addTimestamp(System.DateTime.UtcNow);
 
-        //Transmits all stored data to the Influx database. Stored data are deleted automatically afterwards to avoid duplication
+        //Transmits all stored data to the Influx database.
         influx.writeMeasurment(GetComponent<MonoBehaviour>(), p);
     }
 
 
+    void ExampleQuery()
+    {
+        // Sends a query request to the server.
+        influx.getQuery(GetComponent<MonoBehaviour>(),"SELECT * FROM dummy_metric");
+        // It uses the Database from InfluxData singleton classes set in the config, or set at startup.
+
+        // Same line again, just this time we are using pretty print function from influxdb
+        influx.getQuery(GetComponent<MonoBehaviour>(), "SELECT * FROM dummy_metric LIMIT 2",true);
+
+        /* 
+            Basically the difference is that the query returns as a json. 
+            The pretty print gives a nicer readable format.
+         */
+
+    }
 }

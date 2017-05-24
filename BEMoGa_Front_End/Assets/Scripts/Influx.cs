@@ -54,8 +54,8 @@ namespace InfluxBemoga
 
         /// <summary>
         /// Set if you want to use print or no printing.
-        /// Recommended to use during development and authentication test access
-        /// Defaults to false on creation
+        /// Recommended to use during development and authentication test access.
+        /// Defaults to false on creation.
         /// </summary>
         /// <param name="printSet">True if the user can print, false if you want to turn off print</param>
         public void usePrint(bool printSet)
@@ -67,20 +67,21 @@ namespace InfluxBemoga
         }
 
         /// <summary>
-        /// Get a query the default way, and the recommended way
-        /// The URL get autp generated and the db get added to the fields.
-        /// However it can only do a single query. If you want more advanced queries
-        /// With use of epoch and the other alternatives, use the custom WWWform query
+        /// Get a query the default way, and the recommended way.
+        /// The URL get auto generated and the db get added to the fields.
+        /// However it can only do a single query. If you want more advanced queries,
+        /// with use of epoch and the other alternatives from influxdb, use the custom WWWform query.
         /// Read more about queries for influx: https://docs.influxdata.com/influxdb/v1.2/guides/querying_data/
         /// </summary>
         /// <param name="mono">Required for Coroutine</param>
         /// <param name="query">Required for sending the query</param>
-        public void getQuery(MonoBehaviour mono, string query)
+        /// <param name="pretty">"Optional for nice print from the influxdb if true. Default false</param>
+        public void getQuery(MonoBehaviour mono, string query, bool pretty = false)
         {
             WWWForm form = new WWWForm();
             form.AddField("db", InfluxData.Instance.getNameDB());
             form.AddField("q", query);
-            var url = InfluxData.Instance.getQueryURl();
+            var url = InfluxData.Instance.getQueryURl(pretty);
             var bytes = form.data;
             SendData sd = new SendData(util.isPrint());
             mono.StartCoroutine(sd.httpRequest(url, bytes));
@@ -98,9 +99,10 @@ namespace InfluxBemoga
         /// </summary>
         /// <param name="mono">Required for Coroutine</param>
         /// <param name="form">Required for sending query and parameters</param>
-        public void getQuery(MonoBehaviour mono, WWWForm form)
+        /// <param name="pretty">"Optional for nice print from the influxdb if true. Default false</param>
+        public void getQuery(MonoBehaviour mono, WWWForm form, bool pretty = false)
         {
-            var url = InfluxData.Instance.getQueryURl();
+            var url = InfluxData.Instance.getQueryURl(pretty);
             SendData sd = new SendData(util.isPrint());
             var bytes = form.data;
             mono.StartCoroutine(sd.httpRequest(url, bytes));
